@@ -30,9 +30,22 @@ header {visibility: hidden;}
     max-width: 1000px !important;
 }
 
+/* ===== АНИМАЦИИ ===== */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-15px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
 @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.92); }
+    to   { opacity: 1; transform: scale(1); }
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 .mini-title {
@@ -42,6 +55,7 @@ header {visibility: hidden;}
     font-weight: 600;
     margin: 0.3rem 0 0.6rem 0;
     letter-spacing: 0.02em;
+    animation: fadeInDown 0.7s ease-out;
 }
 
 .slide-card {
@@ -51,18 +65,23 @@ header {visibility: hidden;}
     padding: 1.5rem 1.8rem;
     text-align: center;
     margin: 0.5rem 0;
-    animation: fadeInUp 0.6s ease-out;
+    animation: fadeInUp 0.8s ease-out;
     box-shadow: 0 10px 40px rgba(232, 93, 42, 0.15);
 }
-.slide-emoji { font-size: 3rem; margin-bottom: 0.5rem; }
-.slide-title { font-size: 1.7rem; font-weight: 800; color: #F5E6D3; margin-bottom: 0.3rem; }
-.slide-subtitle { font-size: 1rem; color: #E85D2A; margin-bottom: 1rem; font-weight: 600; }
 .slide-text { font-size: 0.95rem; color: #D4B89C; line-height: 1.7; text-align: left; white-space: pre-line; }
-.progress-text { text-align: center; color: #8B6F5A; font-size: 0.85rem; margin-bottom: 0.3rem; }
+
+.progress-text {
+    text-align: center;
+    color: #8B6F5A;
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+    animation: fadeIn 0.6s ease-out;
+}
 
 .element-container { margin-bottom: 0.3rem !important; }
 .stProgress { margin-bottom: 0.4rem !important; }
 
+/* Прогресс-бар */
 div[data-testid="stProgress"] > div > div { background-color: #3A2218 !important; }
 .stProgress > div > div { background-color: #3A2218 !important; }
 div[role="progressbar"] { background-color: #3A2218 !important; }
@@ -70,6 +89,7 @@ div[data-testid="stProgress"] > div > div > div { background-color: #E85D2A !imp
 .stProgress > div > div > div { background-color: #E85D2A !important; }
 div[role="progressbar"] > div { background-color: #E85D2A !important; }
 
+/* Кнопки */
 .stButton > button,
 div[data-testid="stButton"] > button {
     background-color: #E85D2A !important;
@@ -78,30 +98,38 @@ div[data-testid="stButton"] > button {
     border-radius: 10px !important;
     font-weight: 600 !important;
     padding: 0.4rem 1rem !important;
+    transition: all 0.25s ease !important;
+    animation: fadeIn 0.9s ease-out;
 }
 .stButton > button:hover,
 div[data-testid="stButton"] > button:hover {
     background-color: #FF7A3D !important;
     border-color: #FF7A3D !important;
     color: #FFFFFF !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(232, 93, 42, 0.4);
 }
 .stButton > button:focus,
 div[data-testid="stButton"] > button:focus {
     box-shadow: none !important;
 }
 
+/* Картинка */
 img {
     border-radius: 16px;
     margin: 0.6rem 0;
     box-shadow: 0 10px 40px rgba(232, 93, 42, 0.3);
+    animation: zoomIn 0.9s ease-out;
 }
 
+/* Точки */
 .dots-container {
     display: flex;
     justify-content: center;
     gap: 0.5rem;
     margin-top: 1rem;
     margin-bottom: 0.5rem;
+    animation: fadeIn 1s ease-out;
 }
 .dot {
     width: 12px;
@@ -133,7 +161,7 @@ st.progress((current + 1) / total)
 emoji_html = f'{slide["emoji"]} ' if "emoji" in slide else ""
 st.markdown(f'<p class="mini-title">{emoji_html}{slide["title"]} — {slide["subtitle"]}</p>', unsafe_allow_html=True)
 
-# Картинка (если есть) — уменьшенная
+# Картинка (если есть)
 if "image" in slide:
     img = load_image(slide["image"])
     if img:
