@@ -10,7 +10,6 @@ st.set_page_config(
 
 
 def load_image(path):
-    """Загружает картинку из файла."""
     try:
         return Image.open(path)
     except Exception:
@@ -34,6 +33,15 @@ header {visibility: hidden;}
 @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
+}
+
+.mini-title {
+    text-align: center;
+    color: #E85D2A;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0.3rem 0 0.6rem 0;
+    letter-spacing: 0.02em;
 }
 
 .slide-card {
@@ -82,14 +90,12 @@ div[data-testid="stButton"] > button:focus {
     box-shadow: none !important;
 }
 
-/* Картинка слайда */
 img {
     border-radius: 16px;
     margin: 0.6rem 0;
     box-shadow: 0 10px 40px rgba(232, 93, 42, 0.3);
 }
 
-/* Точки навигации */
 .dots-container {
     display: flex;
     justify-content: center;
@@ -123,13 +129,9 @@ slide = SLIDES[current]
 st.markdown(f'<p class="progress-text">Слайд {current + 1} з {total}</p>', unsafe_allow_html=True)
 st.progress((current + 1) / total)
 
-# Верхняя часть карточки (эмодзи, если есть)
-emoji_html = f'<div class="slide-emoji">{slide["emoji"]}</div>' if "emoji" in slide else ""
-st.markdown(f'<div class="slide-card">'
-            f'{emoji_html}'
-            f'<div class="slide-title">{slide["title"]}</div>'
-            f'<div class="slide-subtitle">{slide["subtitle"]}</div>'
-            f'</div>', unsafe_allow_html=True)
+# Мини-заголовок
+emoji_html = f'{slide["emoji"]} ' if "emoji" in slide else ""
+st.markdown(f'<p class="mini-title">{emoji_html}{slide["title"]} — {slide["subtitle"]}</p>', unsafe_allow_html=True)
 
 # Картинка (если есть)
 if "image" in slide:
@@ -144,7 +146,7 @@ st.markdown(f'<div class="slide-card">'
             f'<div class="slide-text">{slide["text"]}</div>'
             f'</div>', unsafe_allow_html=True)
 
-# Кнопки навигации
+# Кнопки
 col1, col2, col3 = st.columns([1, 1, 1])
 with col1:
     if current > 0:
@@ -161,7 +163,7 @@ with col3:
             st.session_state.slide = 0
             st.rerun()
 
-# Точки навигации
+# Точки
 dots_html = '<div class="dots-container">'
 for i in range(total):
     active = "active" if i == current else ""
