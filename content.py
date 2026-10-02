@@ -2,7 +2,7 @@
 
 SLIDES = [
     {
-        "emoji": "🐼",
+        "image": "red_panda.jpg",
         "title": "Червона панда",
         "subtitle": "Ailurus fulgens — унікальний вид тварин",
         "text": (
