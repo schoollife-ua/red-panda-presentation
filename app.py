@@ -1,4 +1,5 @@
 import streamlit as st
+from PIL import Image
 from content import SLIDES
 
 st.set_page_config(
@@ -6,6 +7,15 @@ st.set_page_config(
     page_icon="🐼",
     layout="centered",
 )
+
+
+def load_image(path):
+    """Загружает картинку из файла."""
+    try:
+        return Image.open(path)
+    except Exception:
+        return None
+
 
 st.markdown("""
 <style>
@@ -72,7 +82,14 @@ div[data-testid="stButton"] > button:focus {
     box-shadow: none !important;
 }
 
-/* ===== ТОЧКИ НАВИГАЦИИ ===== */
+/* Картинка слайда */
+img {
+    border-radius: 16px;
+    margin: 0.6rem 0;
+    box-shadow: 0 10px 40px rgba(232, 93, 42, 0.3);
+}
+
+/* Точки навигации */
 .dots-container {
     display: flex;
     justify-content: center;
@@ -106,13 +123,28 @@ slide = SLIDES[current]
 st.markdown(f'<p class="progress-text">Слайд {current + 1} з {total}</p>', unsafe_allow_html=True)
 st.progress((current + 1) / total)
 
+# Верхняя часть карточки (эмодзи, если есть)
+emoji_html = f'<div class="slide-emoji">{slide["emoji"]}</div>' if "emoji" in slide else ""
 st.markdown(f'<div class="slide-card">'
-            f'<div class="slide-emoji">{slide["emoji"]}</div>'
+            f'{emoji_html}'
             f'<div class="slide-title">{slide["title"]}</div>'
             f'<div class="slide-subtitle">{slide["subtitle"]}</div>'
+            f'</div>', unsafe_allow_html=True)
+
+# Картинка (если есть)
+if "image" in slide:
+    img = load_image(slide["image"])
+    if img:
+        col1, col2, col3 = st.columns([1, 3, 1])
+        with col2:
+            st.image(img, use_container_width=True)
+
+# Текст слайда
+st.markdown(f'<div class="slide-card">'
             f'<div class="slide-text">{slide["text"]}</div>'
             f'</div>', unsafe_allow_html=True)
 
+# Кнопки навигации
 col1, col2, col3 = st.columns([1, 1, 1])
 with col1:
     if current > 0:
