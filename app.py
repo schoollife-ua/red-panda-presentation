@@ -133,11 +133,11 @@ st.progress((current + 1) / total)
 emoji_html = f'{slide["emoji"]} ' if "emoji" in slide else ""
 st.markdown(f'<p class="mini-title">{emoji_html}{slide["title"]} — {slide["subtitle"]}</p>', unsafe_allow_html=True)
 
-# Картинка (если есть)
+# Картинка (если есть) — уменьшенная
 if "image" in slide:
     img = load_image(slide["image"])
     if img:
-        col1, col2, col3 = st.columns([1, 3, 1])
+        col1, col2, col3 = st.columns([1, 1.5, 1])
         with col2:
             st.image(img, use_container_width=True)
 
