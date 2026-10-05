@@ -53,7 +53,7 @@ header {visibility: hidden;}
     color: #E85D2A;
     font-size: 0.95rem;
     font-weight: 600;
-    margin: 0.3rem 0 0.6rem 0;
+    margin: 0.2rem 0 0.4rem 0;
     letter-spacing: 0.02em;
     animation: fadeInDown 0.7s ease-out;
 }
@@ -62,24 +62,24 @@ header {visibility: hidden;}
     background: #2B1810;
     border: 1px solid #4A2818;
     border-radius: 18px;
-    padding: 1.5rem 1.8rem;
+    padding: 1rem 1.5rem;
     text-align: center;
-    margin: 0.5rem 0;
+    margin: 0.3rem 0;
     animation: fadeInUp 0.8s ease-out;
     box-shadow: 0 10px 40px rgba(232, 93, 42, 0.15);
 }
-.slide-text { font-size: 0.95rem; color: #D4B89C; line-height: 1.7; text-align: left; white-space: pre-line; }
+.slide-text { font-size: 0.9rem; color: #D4B89C; line-height: 1.5; text-align: left; white-space: pre-line; }
 
 .progress-text {
     text-align: center;
     color: #8B6F5A;
-    font-size: 0.85rem;
-    margin-bottom: 0.3rem;
+    font-size: 0.8rem;
+    margin-bottom: 0.2rem;
     animation: fadeIn 0.6s ease-out;
 }
 
-.element-container { margin-bottom: 0.3rem !important; }
-.stProgress { margin-bottom: 0.4rem !important; }
+.element-container { margin-bottom: 0.2rem !important; }
+.stProgress { margin-bottom: 0.3rem !important; }
 
 /* Прогресс-бар */
 div[data-testid="stProgress"] > div > div { background-color: #3A2218 !important; }
@@ -97,7 +97,7 @@ div[data-testid="stButton"] > button {
     border: 1px solid #E85D2A !important;
     border-radius: 10px !important;
     font-weight: 600 !important;
-    padding: 0.4rem 1rem !important;
+    padding: 0.35rem 0.9rem !important;
     transition: all 0.25s ease !important;
     animation: fadeIn 0.9s ease-out;
 }
@@ -114,10 +114,13 @@ div[data-testid="stButton"] > button:focus {
     box-shadow: none !important;
 }
 
-/* Картинка */
+/* Картинка — ограничиваем высоту, чтобы влезала на экран */
 img {
     border-radius: 16px;
-    margin: 0.6rem 0;
+    margin: 0.3rem 0;
+    max-height: 40vh !important;
+    width: auto !important;
+    object-fit: contain;
     box-shadow: 0 10px 40px rgba(232, 93, 42, 0.3);
     animation: zoomIn 0.9s ease-out;
 }
@@ -127,8 +130,8 @@ img {
     display: flex;
     justify-content: center;
     gap: 0.5rem;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.3rem;
     animation: fadeIn 1s ease-out;
 }
 .dot {
@@ -161,11 +164,11 @@ st.progress((current + 1) / total)
 emoji_html = f'{slide["emoji"]} ' if "emoji" in slide else ""
 st.markdown(f'<p class="mini-title">{emoji_html}{slide["title"]} — {slide["subtitle"]}</p>', unsafe_allow_html=True)
 
-# Картинка (если есть)
+# Картинка (если есть) — уменьшенная, чтобы всё влезало
 if "image" in slide:
     img = load_image(slide["image"])
     if img:
-        col1, col2, col3 = st.columns([1, 1.5, 1])
+        col1, col2, col3 = st.columns([1, 1.1, 1])
         with col2:
             st.image(img, use_container_width=True)
 
