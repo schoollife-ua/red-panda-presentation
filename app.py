@@ -114,12 +114,24 @@ div[data-testid="stButton"] > button:focus {
     box-shadow: none !important;
 }
 
-/* Картинка — крупная, без ограничения по высоте */
+/* Картинка — базовый стиль */
 img {
     border-radius: 16px;
     margin: 0.3rem 0;
     box-shadow: 0 10px 40px rgba(232, 93, 42, 0.3);
     animation: zoomIn 0.9s ease-out;
+}
+
+/* Маленькая картинка — ограничение по высоте */
+.img-small img {
+    max-height: 40vh !important;
+    width: auto !important;
+    object-fit: contain;
+}
+
+/* Большая картинка — без ограничений */
+.img-large img {
+    max-height: none !important;
 }
 
 /* Точки */
@@ -161,13 +173,25 @@ st.progress((current + 1) / total)
 emoji_html = f'{slide["emoji"]} ' if "emoji" in slide else ""
 st.markdown(f'<p class="mini-title">{emoji_html}{slide["title"]} — {slide["subtitle"]}</p>', unsafe_allow_html=True)
 
-# Картинка (если есть) — крупная, широкая колонка
+# Картинка (если есть)
 if "image" in slide:
     img = load_image(slide["image"])
     if img:
-        col1, col2, col3 = st.columns([1, 3, 1])
-        with col2:
-            st.image(img, use_container_width=True)
+        size = slide.get("image_size", "small")
+        if size == "large":
+            # Большая картинка — широкая колонка
+            col1, col2, col3 = st.columns([1, 3, 1])
+            with col2:
+                st.markdown('<div class="img-large">', unsafe_allow_html=True)
+                st.image(img, use_container_width=True)
+                st.markdown('</div>', unsafe_allow_html=True)
+        else:
+            # Маленькая картинка — узкая колонка
+            col1, col2, col3 = st.columns([1, 1.1, 1])
+            with col2:
+                st.markdown('<div class="img-small">', unsafe_allow_html=True)
+                st.image(img, use_container_width=True)
+                st.markdown('</div>', unsafe_allow_html=True)
 
 # Текст слайда
 st.markdown(f'<div class="slide-card">'
