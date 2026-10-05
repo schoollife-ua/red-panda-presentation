@@ -105,6 +105,7 @@ SLIDES = [
     },
     {
         "emoji": "👶",
+        "image": "red_panda_cubs.jpg",
         "title": "Репродуктивний критерій",
         "subtitle": "Розмноження",
         "text": (
