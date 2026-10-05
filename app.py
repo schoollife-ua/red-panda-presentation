@@ -114,13 +114,10 @@ div[data-testid="stButton"] > button:focus {
     box-shadow: none !important;
 }
 
-/* Картинка — ограничиваем высоту, чтобы влезала на экран */
+/* Картинка — крупная, без ограничения по высоте */
 img {
     border-radius: 16px;
     margin: 0.3rem 0;
-    max-height: 40vh !important;
-    width: auto !important;
-    object-fit: contain;
     box-shadow: 0 10px 40px rgba(232, 93, 42, 0.3);
     animation: zoomIn 0.9s ease-out;
 }
@@ -164,11 +161,11 @@ st.progress((current + 1) / total)
 emoji_html = f'{slide["emoji"]} ' if "emoji" in slide else ""
 st.markdown(f'<p class="mini-title">{emoji_html}{slide["title"]} — {slide["subtitle"]}</p>', unsafe_allow_html=True)
 
-# Картинка (если есть) — уменьшенная, чтобы всё влезало
+# Картинка (если есть) — крупная, широкая колонка
 if "image" in slide:
     img = load_image(slide["image"])
     if img:
-        col1, col2, col3 = st.columns([1, 1.1, 1])
+        col1, col2, col3 = st.columns([1, 3, 1])
         with col2:
             st.image(img, use_container_width=True)
 
