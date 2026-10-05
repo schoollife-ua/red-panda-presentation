@@ -29,6 +29,7 @@ SLIDES = [
     },
     {
         "emoji": "🔬",
+        "image": "red_panda_blep.jpg",
         "title": "Морфологічний критерій",
         "subtitle": "Особливості будови",
         "text": (
@@ -74,6 +75,7 @@ SLIDES = [
     },
     {
         "emoji": "🗺️",
+        "image": "red_panda_map.jpg",
         "title": "Географічний критерій",
         "subtitle": "Ареал поширення",
         "text": (
@@ -86,6 +88,7 @@ SLIDES = [
     },
     {
         "emoji": "🌿",
+        "image": "red_panda_habitat.jpg",
         "title": "Екологічний критерій",
         "subtitle": "Місце в екосистемі",
         "text": (
