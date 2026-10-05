@@ -3,6 +3,7 @@
 SLIDES = [
     {
         "image": "red_panda.jpg",
+        "image_size": "large",
         "title": "Червона панда",
         "subtitle": "Ailurus fulgens — унікальний вид тварин",
         "text": (
@@ -30,6 +31,7 @@ SLIDES = [
     {
         "emoji": "🔬",
         "image": "red_panda_blep.jpg",
+        "image_size": "small",
         "title": "Морфологічний критерій",
         "subtitle": "Особливості будови",
         "text": (
@@ -76,6 +78,7 @@ SLIDES = [
     {
         "emoji": "🗺️",
         "image": "red_panda_map.jpg",
+        "image_size": "small",
         "title": "Географічний критерій",
         "subtitle": "Ареал поширення",
         "text": (
@@ -89,6 +92,7 @@ SLIDES = [
     {
         "emoji": "🌿",
         "image": "red_panda_habitat.jpg",
+        "image_size": "small",
         "title": "Екологічний критерій",
         "subtitle": "Місце в екосистемі",
         "text": (
@@ -106,6 +110,7 @@ SLIDES = [
     {
         "emoji": "👶",
         "image": "red_panda_cubs.jpg",
+        "image_size": "small",
         "title": "Репродуктивний критерій",
         "subtitle": "Розмноження",
         "text": (
